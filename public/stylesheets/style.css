@@ -41,3 +41,8 @@ nav span {
 a {
   color: #00B7FF;
 }
+
+#foto_autor{
+  height: 100px;
+  margin-top: 10px;
+}
