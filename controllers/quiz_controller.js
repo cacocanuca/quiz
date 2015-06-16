@@ -18,6 +18,7 @@ exports.index = function(req, res) {
   var search = (req.query.search)? '%' + req.query.search.replace(/ +/g,'%') + '%' : req.query.search;
   // Busca preguntas que contengan la variable search, ordenadas alfabeticamente
   models.Quiz.findAll({where: {pregunta: {like :search}}, order:['pregunta']}).then(
+  //models.Quiz.findAll().then(
     function(quizes) {
       res.render('quizes/index.ejs', {quizes: quizes});
   }).catch(function(error) { next(error);});
