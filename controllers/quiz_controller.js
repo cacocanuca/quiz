@@ -17,7 +17,8 @@ exports.index = function(req, res) {
   // Si existe query en la ruta, define una variable search con ella, incluyendo '%' al principio, al final y reemplazando los espacios en blanco
   var search = (req.query.search)? '%' + req.query.search.replace(/ +/g,'%') + '%' : req.query.search;
   // Busca preguntas que contengan la variable search, ordenadas alfabeticamente
-  models.Quiz.findAll({where: {pregunta: {like :search}}, order:['pregunta']}).then(
+  // models.Quiz.findAll({where: {pregunta: {like :search}}, order:['pregunta']}).then(
+  models.Quiz.findAll().then(
     function(quizes) {
       res.render('quizes/index.ejs', {quizes: quizes});
   }).catch(function(error) { next(error);});
