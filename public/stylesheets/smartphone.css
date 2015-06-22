@@ -17,3 +17,7 @@ body {
 footer, input {
   font-size: large;
 }
+
+.rem {
+  display: none;
+}
