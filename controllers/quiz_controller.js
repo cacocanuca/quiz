@@ -5,7 +5,7 @@ exports.load = function(req, res, next, quizId) {
   models.Quiz.find(quizId).then(
     function(quiz) {
       if (quiz) {
-        req.quiz =quiz;
+        req.quiz = quiz;
         next();
       } else { next(new Error('No existe quizId = ' + quizId));}
     }
@@ -95,4 +95,11 @@ exports.update = function(req, res) {
       }   // res.redirect: Redirección HTTP (URL relativo) lista de preguntas
     }
   );
+};
+
+// DELETE /quizes/:id
+exports.destroy = function(req, res) {
+  req.quiz.destroy().then( function() {
+    res.redirect('/quizes');
+  }).catch(function(error){next(error)});
 };
