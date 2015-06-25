@@ -24,6 +24,9 @@ app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
