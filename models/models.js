@@ -39,20 +39,31 @@ sequelize.sync().then(function() {
   Quiz.count().then(function(count) {
     if (count === 0) {  // la tabla se inicializa solo si está vacía
       Quiz.create({ pregunta: 'Capital de Italia',
-                    respuesta: 'Roma'
+                    respuesta: 'Roma',
+                    tema: 'Humanidades'
                   });
       Quiz.create({ pregunta: 'Capital de Portugal',
-                    respuesta: 'Lisboa'
-                  });
-      Quiz.create({ pregunta: 'Capital de España',
-                    respuesta: 'Madrid'
+                    respuesta: 'Lisboa',
+                    tema: 'Humanidades'
                   });
       Quiz.create({ pregunta: 'Capital de Argentina',
-                    respuesta: 'Buenos Aires'
+                    respuesta: 'Buenos Aires',
+                    tema: 'Humanidades'
                   });
-      Quiz.create({ pregunta: 'Capital de Brasil',
-                    respuesta: 'Brasilia'
+
+      Quiz.create({ pregunta: 'Fórmula química del agua',
+                    respuesta: 'H2O',
+                    tema: 'Ciencia'
+                  });
+      Quiz.create({ pregunta: 'Número de lados de un pentágono (en letra)',
+                    respuesta: 'cinco',
+                    tema: 'Ciencia'
+                  });
+      Quiz.create({ pregunta: 'Planeta más próximo al Sol',
+                    respuesta: 'Mercurio',
+                    tema: 'Ciencia'
                   })
+
       .then(function() {console.log('Base de datos inicializada')});
     };
   });
