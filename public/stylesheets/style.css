@@ -28,6 +28,10 @@ header, nav, section {
   text-align: center;
 }
 
+.right{
+  float: right;
+}
+
 footer {
   background: #eee;
   text-align: center;

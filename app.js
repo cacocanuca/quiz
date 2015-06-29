@@ -5,9 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
-
 var routes = require('./routes/index');
-
+var methodOverride = require('method-override'); // Sólo funciona con esta declaración aquí, después de la declaración de routes
+var session = require('express-session');
 var app = express();
 
 // view engine setup
@@ -21,11 +21,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded( {extended: true} ));
-app.use(cookieParser());
+app.use(cookieParser('Quiz 2015'));
+app.use(session({ secret: 'cookie-super-secreta', resave: true, saveUninitialized: true }));
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-var methodOverride = require('method-override');
-app.use(methodOverride('_method'));
+// Helpers dinámicos:
+app.use(function(req, res, next) {
+    // guardar path en session.redir para después de login
+    if (!req.path.match(/\/login|\/logout/)) {
+      req.session.redir = req.path;
+    }
+
+    // Hacer vivible req.session en las vistas
+    res.locals.session = req.session;
+    next();
+});
 
 app.use('/', routes);
 
