@@ -38,6 +38,19 @@ app.use(function(req, res, next) {
     next();
 });
 
+// MW de auto-logout
+app.use(function(req, res, next) {
+  var now = new Date();
+  var time = now.getTime();
+  if (req.session.user) {
+    if (time-req.session.time > 10000) {  // Si han pasado más de 10 segundos desde la última transacción
+      delete req.session.user;            // Destruye la sesión
+    }
+  }
+  req.session.time = time;
+  next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
